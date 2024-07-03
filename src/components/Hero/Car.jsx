@@ -1,5 +1,5 @@
 import React from 'react'
-import car from '../Hero/car.png'
+import car from '../Hero/car3.gif'
 import {motion} from 'framer-motion'
 
 const Car = () => {
@@ -16,9 +16,9 @@ const Car = () => {
             ease: "linear" 
           }}
         >
-        <img src={car}  />
+        <img src={car} className='h-48 ' />
         </motion.div>
-      <hr className='h-1 bg-black relative bottom-24' />
+      <hr className='h-1 bg-black relative bottom-12' />
     </div>
   )
 }
