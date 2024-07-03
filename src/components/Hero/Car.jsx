@@ -4,7 +4,7 @@ import {motion} from 'framer-motion'
 
 const Car = () => {
   return (
-    <div>
+    <div className='overflow-hidden'>
         <motion.div
          animate={{
             x: ['0%', '100%'],
@@ -16,7 +16,7 @@ const Car = () => {
             ease: "linear" 
           }}
         >
-        <img src={car} className='' />
+        <img src={car}  />
         </motion.div>
       <hr className='h-1 bg-black relative bottom-24' />
     </div>
