@@ -5,6 +5,8 @@ import Car from './components/Hero/Car'
 import Features from './components/Features/Features'
 import SocialMedia from './components/Footer/SocialMedia'
 import Footer from './components/Footer/Footer'
+import SignIn from "./components/AccountManage/SignIn"
+import SignUp from "./components/AccountManage/SignUp"
 
 function App() {
   

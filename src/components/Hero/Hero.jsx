@@ -10,7 +10,7 @@ const Hero = () => {
         <div className='flex justify-between'>
 
             <div className='header px-20 mx-28 my-16 text-center w-3/6'>
-                <div className='text-7xl font-bold'>   <p>In a Hurry? <br />
+                <div className='text-7xl font-serif font-bold'>   <p>In a Hurry? <br />
                 PARK It Up!</p>
                 </div>
 
