@@ -42,6 +42,7 @@ const SignUp = () => {
 
   return (
     <>
+
       <section className="flex md:flex-row flex-col items-center justify-around">
         <div className="flex flex-col mt-7 items-center">
           <p className='font-extrabold md:text-4xl text-2xl'>NEVER WORRY ABOUT </p>

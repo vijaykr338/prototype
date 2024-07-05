@@ -10,7 +10,7 @@ const Car = () => {
             x: ['0%', '100%'],
           }}
           transition={{
-            duration: 5, 
+            duration: 3, 
             repeat: Infinity, 
             repeatType: "loop", 
             ease: "linear" 

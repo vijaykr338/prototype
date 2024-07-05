@@ -7,23 +7,24 @@ const Hero = () => {
    
 
     return (
-        <div className='flex justify-between'>
-
-            <div className='header px-20 mx-28 my-16 text-center w-3/6'>
-                <div className='text-7xl font-serif font-bold'>   <p>In a Hurry? <br />
-                PARK It Up!</p>
-                </div>
-
-                <div className='flex items-center relative left-9'>
-                    <input className='text-2xl px-8 rounded-full my-10 border-2 h-16 w-full border-black' type="text" placeholder='Search for a spot right now!' />
-                    <FaSearch style={{backgroundColor: '#0000FF'}} className='cursor-pointer relative right-20 rounded-full text-white px-4 py-4 h-12 w-20' />
-                </div>
-                <button className='bg-blue-700 text-white text-3xl px-8 py-4 font-bold rounded-full' style={{backgroundColor: '#0000FF'}}>SEARCH NEAR ME</button>
-            </div>
+        <div className='sm:flex justify-between overflow-hidden'>
 
             <div className='image'>
                 <img src={group} />
             </div>
+
+            <div className='header sm:px-20 sm:mx-28 sm:my-16 text-center sm:w-3/6'>
+                <div className='sm:text-7xl text-4xl font-roboto font-bold'>   <p>In a Hurry? <br />
+                PARK It Up!</p>
+                </div>
+
+                <div className='flex items-center relative sm:left-9 left-7'>
+                    <input className='sm:text-2xl  sm:px-8 px-4 rounded-full my-10 border-2 sm:h-16 h-14 w-full border-black' type="text" placeholder='Search for a spot right now!' />
+                    <FaSearch style={{backgroundColor: '#0000FF'}} className='cursor-pointer relative sm:right-20 right-14 rounded-full text-white sm:px-4 sm:py-4 px-2 py-2 sm:h-12 sm:w-20 h-10 w-14' />
+                </div>
+                <button className='bg-blue-700 text-white sm:text-3xl sm:px-8 px-6 py-4 sm:py-4 font-bold rounded-full' style={{backgroundColor: '#0000FF'}}>SEARCH NEAR ME</button>
+            </div>
+
         </div>
     )
 }
