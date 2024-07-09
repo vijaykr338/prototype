@@ -11,7 +11,7 @@ import SignUp from './components/AccountManage/SignUp.jsx';
 import Home from './components/Home/Home.jsx';
 import { Auth0Provider } from '@auth0/auth0-react';
 import AuthenticationGuard from './components/AuthGuard.jsx';
-import { auth0Domain,auth0ClientId,auth0RedirectUri } from '../env.js';
+
 
 
 
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     )
   }
 ]);
-dotenv.config();
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
