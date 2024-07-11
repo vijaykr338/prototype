@@ -3,6 +3,8 @@ import car2 from "./caro.png"
 import { BiHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from 'react-router-dom';
+import SignIn from './SignIn';
 
 const SignUp = () => {
 
@@ -128,7 +130,7 @@ const SignUp = () => {
 
             <p className='flex justify-center my-5 '>
               <span>Already have an account? </span>
-              <a href="" className='px-2 text-blue-500 font-semibold underline'>Sign in</a>
+              <Link to="/sign-in" className='px-2 text-blue-500 font-semibold underline'>Sign in</Link>
             </p>
           </div>
         </div>
