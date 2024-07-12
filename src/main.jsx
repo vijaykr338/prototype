@@ -11,6 +11,9 @@ import SignUp from './components/AccountManage/SignUp.jsx';
 import Home from './components/Home/Home.jsx';
 import { Auth0Provider } from '@auth0/auth0-react';
 import AuthenticationGuard from './components/AuthGuard.jsx';
+const domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
+const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 
 
 
@@ -43,11 +46,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Auth0Provider
     
-    domain="dev-myfhp3irrim5f5ad.us.auth0.com"
-    // domain= import.meta.env.VITE_AUTH0_DOMAIN;
-    clientId="Qe2JNOfnnpA458lB58mIL1TUGELx2Jg0"
+    domain={domain}
+    clientId={clientId}
     authorizationParams={{
-      redirect_uri: "https://prototype-black-chi.vercel.app/home",
+      redirect_uri: redirectUri,
     }}
   >
     <RouterProvider router={router} />
