@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import logo from './file.png';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+  const navigate = useNavigate();
 
   const handleSignUp = () => {
+    if(isAuthenticated){
+        navigate("/home");
+        return null;     
+    }
     loginWithRedirect({
       screen_hint: 'signup',
     });
   };
 
   const handleLogin = () => {
+    if(isAuthenticated){
+      navigate("/home");
+      return null;
+    }
     loginWithRedirect();
   };
 

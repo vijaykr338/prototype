@@ -23,6 +23,7 @@ const Hero = () => {
                     <FaSearch style={{backgroundColor: '#0000FF'}} className='cursor-pointer relative sm:right-20 right-14 rounded-full text-white sm:px-4 sm:py-4 px-2 py-2 sm:h-12 sm:w-20 h-10 w-14' />
                 </div>
                 <button className='bg-blue-700 text-white sm:text-3xl sm:px-8 px-6 py-4 sm:py-4 font-bold rounded-full' style={{backgroundColor: '#0000FF'}}>SEARCH NEAR ME</button>
+                
             </div>
 
         </div>

@@ -20,14 +20,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <App></App>,
   },
-  {
-    path: "/sign-up",
-    element: <SignUp></SignUp>,
-  },
-  {
-    path: "/sign-in",
-    element: <SignIn></SignIn>
-  },
+  // {
+  //   path: "/sign-up",
+  //   element: <SignUp></SignUp>,
+  // },
+  // {
+  //   path: "/sign-in",
+  //   element: <SignIn></SignIn>
+  // },
   {
     path : "/home",
     element: (
@@ -44,7 +44,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Auth0Provider
     
     domain="dev-myfhp3irrim5f5ad.us.auth0.com"
-    // domain= import.meta.env.VITE_AUTH0_DOMAIN;
     clientId="Qe2JNOfnnpA458lB58mIL1TUGELx2Jg0"
     authorizationParams={{
       redirect_uri: "https://prototype-black-chi.vercel.app/home",
