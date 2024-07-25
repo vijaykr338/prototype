@@ -4,6 +4,9 @@ import dotenv from 'dotenv'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // server: {
+  //   host: '127.0.0.1',
+  // },
   plugins: [react()],
   define:{
     'process.env.VITE_AUTH0_DOMAIN' : JSON.stringify(process.env.VITE_AUTH0_DOMAIN),
