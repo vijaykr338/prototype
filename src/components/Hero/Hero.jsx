@@ -1,6 +1,6 @@
 import React from 'react'
 import group from '../Hero/Group.svg'
-import { Search_Btn } from './Search_Btn'
+import SearchPlace from '../SearchPlace'
 
 const Hero = () => {
 
@@ -17,7 +17,7 @@ const Hero = () => {
                 <div className='sm:text-7xl text-4xl font-roboto font-bold'>   <p>In a Hurry? <br />
                 PARK It Up!</p>
                 </div>
-            <Search_Btn/>
+            <SearchPlace/>
             </div>
 
         </div>
