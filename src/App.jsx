@@ -12,10 +12,7 @@ const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 function App() {
 
-  useEffect(()=> {
-    console.log(API_KEY)
-  })
-
+ 
 
   return (
     
