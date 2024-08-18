@@ -36,7 +36,7 @@ const ParkingSpots = ({parkingData}) => {
               <div
               onClick={()=> ParkingSpotClickHandler(parking.place_id)}
               key={parking.place_id}
-              className='flex justify-between border-2 border-black rounded-3xl px-6 py-5'>
+              className='flex justify-between cursor-pointer border-2 border-black rounded-3xl px-6 py-5'>
         <div>
         <h1 className='font-bold text-3xl'>{parking.name}</h1>
         <span className='flex items-center text-lg'><FaStar className='text-yellow-400'/>{parking.rating}</span>

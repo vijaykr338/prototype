@@ -15,18 +15,20 @@ import {
 } from "@vis.gl/react-google-maps";
 import SideWindow from "./SideWindow";
 import useParkingStore from "./parkingStoreContext";
+import MapHandler from "./MapHandler";
+import NearbyPlaces from "./NearbyPlaces";
+import SearchPlace from "../SearchPlace";
+
 import { useLocation } from "react-router-dom";
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 const MapSearcher = () => {
   const [parkingData, setParkingData] = useState([]);
-
-  const [selectedPlace, setSelectedPlace] = useState(null);
   const [markerRef, marker] = useAdvancedMarkerRef();
   const isInfoWindowOpen = useParkingStore((state) => state.isInfoWindowOpen);
-
-  
+  const selectedSpot = useParkingStore((state) => state.selectedSpot);
+  const setSelectedSpot = useParkingStore((state) => state.setSelectedSpot);
 
   return (
     <APIProvider
@@ -46,9 +48,9 @@ const MapSearcher = () => {
             disableDefaultUI={true}
           >
             <AdvancedMarker ref={markerRef} position={null} />
-            {selectedPlace && (
+            {selectedSpot && (
               <AdvancedMarker
-                position={selectedPlace.geometry?.location}
+                position={selectedSpot.geometry?.location}
                 title="Selected Location"
               >
                 <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
@@ -56,24 +58,25 @@ const MapSearcher = () => {
                 </div>
               </AdvancedMarker>
             )}
-            {selectedPlace && (
+            {selectedSpot && (
               <NearbyPlaces
-                place={selectedPlace}
+                place={selectedSpot}
                 marker={marker}
                 setParkingData={setParkingData}
               />
             )}
           </Map>
 
-          <MapHandler place={selectedPlace} marker={marker} />
+          <MapHandler place={selectedSpot} marker={marker} />
         </div>
 
-        <div className="flex w-2/3 absolute top-0 left-0 h-full z-10">
+        <div className={`flex ${isInfoWindowOpen ? 'w-2/3' : 'w-1/3'} absolute top-0 left-0 h-full z-10`}>
           <div className="w-[600px]">
             <SideWindow
-              onPlaceSelect={setSelectedPlace}
+              onPlaceSelect={setSelectedSpot}
               parkingData={parkingData}
             />
+            
           </div>
 
           {isInfoWindowOpen && (
@@ -87,131 +90,6 @@ const MapSearcher = () => {
   );
 };
 
-const MapHandler = ({ place, marker }) => {
-  const map = useMap();
-  //for working with maps
-  //the usual format is https://visgl.github.io/react-google-maps/docs/get-started
-  //see the hooks part
 
-  useEffect(() => {
-    if (!map || !place || !marker) return;
-
-    if (place.geometry?.viewport) {
-      map.fitBounds(place.geometry?.viewport);
-    }
-    console.log(place.geometry?.viewport);
-
-    marker.position = place.geometry?.location;
-  }, [map, place, marker]);
-  return null;
-};
-
-const NearbyPlaces = ({ place, setParkingData }) => {
-  const map = useMap();
-  const placesLib = useMapsLibrary("places");
- 
-  //Places API is our bread and butter for working
-  const [nearbyMarkers, setNearbyMarkers] = useState([]);
-  const [activeMarker, setActiveMarker] = useState(null);
-  const [infoContent, setInfoContent] = useState(null);
-
-  useEffect(() => {
-    if (!placesLib || !map || !place) return;
-
-    const service = new placesLib.PlacesService(map);
-    console.log(place, "this is")
-    
-    const request = {
-      location: place.geometry.location,
-      radius: 750, // search within 750 meters
-      type: ["parking"], // search for parking places
-      fields: ["geometry", "name", "place_id", "vicinity"], // include photos field
-    };
-
-    service.nearbySearch(request, (results, status) => {
-      if (status === placesLib.PlacesServiceStatus.OK) {
-        const PhotoOptions = {
-          maxHeight: 300,
-        };
-        // console.log(results);
-
-        const markers = results.map((result) => ({
-          position: result.geometry.location,
-          name: result.name,
-          address: result.vicinity,
-          placeId: result.place_id,
-          photos: result.photos
-            ? result.photos.map((photo) => photo.getUrl(PhotoOptions))
-            : [], // extract photo URLs
-        }));
-        setParkingData(results);
-        setNearbyMarkers(markers);
-      } else {
-        console.error("Nearby search failed:", status);
-      }
-    });
-  }, [placesLib, map, place ]);
-
-  const handleMarkerClick = (marker) => {
-    setActiveMarker(marker.position);
-
-    const service = new placesLib.PlacesService(map);
-    // https://developers.google.com/maps/documentation/places/web-service/details
-    service.getDetails(
-      {
-        placeId: marker.placeId,
-        fields: ["name", "rating", "formatted_address", "review"],
-      },
-      (place, status) => {
-        console.log(place);
-
-        if (status === placesLib.PlacesServiceStatus.OK) {
-          setInfoContent({
-            name: place.name,
-            address: place.formatted_address,
-            rating: place.rating,
-            photos: marker.photos,
-          });
-        } else {
-          console.error("Failed to fetch place details:", status);
-        }
-      }
-    );
-  };
-
-  return (
-    <>
-      {nearbyMarkers.map((marker, index) => (
-        <AdvancedMarker
-          key={index}
-          position={marker.position}
-          title={marker.name}
-          onClick={() => handleMarkerClick(marker)}
-        />
-      ))}
-
-      {activeMarker && infoContent && (
-        <InfoWindow
-          position={activeMarker}
-          onCloseClick={() => setActiveMarker(null)}
-        >
-          <div>
-            <h2>{infoContent.name}</h2>
-            <p>{infoContent.address}</p>
-            {console.log(infoContent)}
-            {infoContent.photos &&
-              infoContent.photos.map((photo, index) => (
-                <img
-                  key={index}
-                  src={photo}
-                  alt={`${infoContent.name} photo ${index + 1}`}
-                />
-              ))}
-          </div>
-        </InfoWindow>
-      )}
-    </>
-  );
-};
 
 export default MapSearcher;
