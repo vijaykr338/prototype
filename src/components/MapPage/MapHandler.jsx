@@ -18,7 +18,7 @@ import useParkingStore from "./parkingStoreContext";
 
 
 const MapHandler = ({ place, marker }) => {
-    const selectedSpot = useParkingStore((state)=> state.selectedSpot); 
+   
     const map = useMap();
     //for working with maps
     //the usual format is https://visgl.github.io/react-google-maps/docs/get-started

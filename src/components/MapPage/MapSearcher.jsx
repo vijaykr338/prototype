@@ -17,7 +17,7 @@ import SideWindow from "./SideWindow";
 import useParkingStore from "./parkingStoreContext";
 import MapHandler from "./MapHandler";
 import NearbyPlaces from "./NearbyPlaces";
-import SearchPlace from "../SearchPlace";
+
 
 import { useLocation } from "react-router-dom";
 
@@ -29,6 +29,7 @@ const MapSearcher = () => {
   const isInfoWindowOpen = useParkingStore((state) => state.isInfoWindowOpen);
   const selectedSpot = useParkingStore((state) => state.selectedSpot);
   const setSelectedSpot = useParkingStore((state) => state.setSelectedSpot);
+
 
   return (
     <APIProvider
@@ -58,6 +59,8 @@ const MapSearcher = () => {
                 </div>
               </AdvancedMarker>
             )}
+            {/* current location */}
+
             {selectedSpot && (
               <NearbyPlaces
                 place={selectedSpot}

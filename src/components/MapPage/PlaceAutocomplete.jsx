@@ -40,9 +40,10 @@ const PlaceAutocomplete = ({ onPlaceSelect }) => {
       placeAutocomplete.addListener("place_changed", () => {
         const place = placeAutocomplete.getPlace();
         onPlaceSelect(place);
+        console.log(place, "have you heard of the high elves")
         setSelectedSpot(place)
         navigate("/search-for-parking")
-        console.log(onPlaceSelect, "stop right there criminal scum")
+        
         
       });
     }, [onPlaceSelect, placeAutocomplete]);

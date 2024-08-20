@@ -15,6 +15,8 @@ import {
 import ParkingSpots from "./ParkingSpots";
 import useParkingStore from "./parkingStoreContext";
 import PlaceAutocomplete from "./PlaceAutocomplete";
+
+import TextSearch from "./TextSearch";
 // Adjust the import path if necessary
 
 const SideWindow = ({ onPlaceSelect, parkingData, setParkingID }) => {
@@ -26,7 +28,8 @@ const SideWindow = ({ onPlaceSelect, parkingData, setParkingID }) => {
     <div className="h-screen bg-white space-x-4 px-5 py-4">
       <div className="h-full overflow-scroll ">
         <h1 className="font-inter font-bold text-3xl">Book Parking Near</h1>
-        <PlaceAutocomplete onPlaceSelect={onPlaceSelect} />
+        <TextSearch/>
+        {/* <PlaceAutocomplete onPlaceSelect={onPlaceSelect} /> */}
         <ParkingSpots parkingData={parkingData} />
       </div>
     

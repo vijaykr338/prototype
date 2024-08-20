@@ -36,8 +36,9 @@ const NearbyPlaces = ({ place, setParkingData }) => {
       
       const request = {
         location: place.geometry.location,
-        radius: 750, // search within 750 meters
-        type: ["parking"], // search for parking places
+        radius: 500, // search within 500 meters
+        type: ["parking"],
+        // search for parking places
         fields: ["geometry", "name", "place_id", "vicinity"], // include photos field
       };
   

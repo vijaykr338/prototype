@@ -13,6 +13,7 @@ const ParkingSpots = ({parkingData}) => {
   const setInfoWindowOpen = useParkingStore((state)=> state.setInfoWindowOpen)
   const isInfoWindowOpen = useParkingStore((state)=> state.isInfoWindowOpen)
   const selectedParkingID = useParkingStore((state) => state.selectedParkingID);
+  const parkingPlaces = useParkingStore((state)=> state.parkingPlaces)
 
   const ParkingSpotClickHandler = (place_id) => {
     if(selectedParkingID !== place_id){
@@ -31,7 +32,7 @@ const ParkingSpots = ({parkingData}) => {
     <div className='space-y-5 h-screen'>
 
       {
-        parkingData && parkingData.map((parking)=> {
+        parkingPlaces && parkingPlaces.map((parking)=> {
           return(
               <div
               onClick={()=> ParkingSpotClickHandler(parking.place_id)}

@@ -13,7 +13,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';  
 import useParkingStore from './MapPage/parkingStoreContext';
 import PlaceAutocomplete from './MapPage/PlaceAutocomplete';
-
+import TextSearch from './MapPage/TextSearch';
 
 const SearchPlace = ({onPlaceSelect}) => {
   const setSelectedSpot = useParkingStore((state) => state.setSelectedSpot);
@@ -21,7 +21,7 @@ const SearchPlace = ({onPlaceSelect}) => {
   
   return (
     <div>
-    <PlaceAutocomplete onPlaceSelect={setSelectedSpot} />
+    <TextSearch onPlaceSelect={setSelectedSpot} />
       
     </div>
   )
