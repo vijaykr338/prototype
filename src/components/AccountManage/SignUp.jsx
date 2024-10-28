@@ -5,9 +5,14 @@ import { BiShow } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import SignIn from './SignIn';
+import { auth ,GoogleProvider} from '../../config/firebaseconfig';
+import {createUserWithEmailAndPassword , signInWithPopup} from "firebase/auth"
+import { useNavigate } from 'react-router-dom';
+
+
 
 const SignUp = () => {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
     dob: '',
@@ -23,12 +28,31 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log('Form data submitted:', formData);
     // You can add form submission logic here
+    try{
+
+      await createUserWithEmailAndPassword(auth,formData.emailId,formData.yourPassword);
+      navigate("/home");
+    }
+    catch(e){
+      console.log("some err",e);
+    }
   };
 
+  const SignUpWithGoogle = async(e)=>{
+    e.preventDefault();
+    try{
+      await signInWithPopup(auth,GoogleProvider); 
+      navigate("/home");
+    }
+    catch(e){
+      console.log("some err",e);
+    }
+    
+  }
   const passwordRef = useRef()
   const [ShowOrHide, setShowOrHide] = useState('hide')
 
@@ -123,7 +147,7 @@ const SignUp = () => {
           </form>
           <hr />
           <div className='px-10 py-5'>
-            <a href="" className="flex items-center justify-center border border-gray-300 rounded-md px-4 py-2 hover:border-white hover:ring hover:ring-blue-200">
+            <a onClick={SignUpWithGoogle} className="flex items-center justify-center border border-gray-300 rounded-md px-4 py-2 hover:border-white hover:ring hover:ring-blue-200">
               <p className='font-semibold px-2'>Continue with Google</p>
               <FcGoogle className='text-2xl' />
             </a>

@@ -30,7 +30,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
     
     useEffect(() => {
       if (!placesLib || !map || !place) return;
-  
+      
       const service = new placesLib.PlacesService(map);
     
       

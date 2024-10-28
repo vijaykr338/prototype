@@ -6,14 +6,12 @@ import SocialMedia from './components/Footer/SocialMedia'
 import Footer from './components/Footer/Footer'
 import { APIProvider } from '@vis.gl/react-google-maps'
 import { useEffect } from 'react'
-
+import MapSearcher from './components/MapPage/MapSearcher'
+import EmbeddedMap from './components/EmbeddedMap/EmbeddedMap'
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 function App() {
-
- 
-
   return (
     
     <div>
@@ -25,7 +23,8 @@ function App() {
     <Features></Features>
     <SocialMedia></SocialMedia>
     <Footer></Footer> 
-
+    {/* <MapSearcher></MapSearcher> */}
+    {/* <EmbeddedMap origin={22,23} destination={25,26} /> */}
   </APIProvider>
     
    </div>

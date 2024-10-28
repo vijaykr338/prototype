@@ -5,8 +5,12 @@ import { BiShow } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import SignUp from './SignUp';
+import { GoogleProvider, auth } from '../../config/firebaseconfig';
+import {signInWithEmailAndPassword,signInWithPopup} from "firebase/auth"
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     emailId: '',
@@ -27,11 +31,37 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log('Form data submitted:', formData);
+    
+   
     // You can add form submission logic here
+    try{
+      await signInWithEmailAndPassword(auth,formData.emailId,formData.yourPassword);
+      navigate("/home")
+    
+    }
+    catch(e){
+      console.log("error signing in",e);
+    }
   };
+
+  const SignInWithGoogle = async(e)=>{
+    e.preventDefault();
+    console.log('Form data submitted:', formData);
+    
+   
+    // You can add form submission logic here
+    try{
+      await signInWithPopup(auth,GoogleProvider);
+      navigate("/home")
+    
+    }
+    catch(e){
+      console.log("error signing in",e);
+    }
+  }
 
   const passwordRef = useRef()
 
@@ -102,7 +132,7 @@ const SignIn = () => {
               <p className='mx-2'>Keep me logged in</p>
             </div>
             <div className="flex items-center justify-end">
-              <button type="submit"
+              <button type="submit" onClick={handleSubmit}
                 className="w-full font-semibold bg-blue-600 text-white py-2 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring focus:ring-indigo-200">
                 Sign in
               </button>
@@ -110,7 +140,7 @@ const SignIn = () => {
           </form>
           <hr />
           <div className='px-10 py-5'>
-            <a href="" className="flex items-center justify-center border border-gray-300 rounded-md px-4 py-2 hover:border-white hover:ring hover:ring-blue-200">
+            <a onClick={SignInWithGoogle} className="flex items-center justify-center border border-gray-300 rounded-md px-4 py-2 hover:border-white hover:ring hover:ring-blue-200">
               <p className='font-semibold px-2'>Sign in with Google</p>
               <FcGoogle className='text-2xl' />
             </a>

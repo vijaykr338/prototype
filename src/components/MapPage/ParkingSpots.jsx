@@ -16,14 +16,14 @@ const ParkingSpots = ({parkingData}) => {
 
   const ParkingSpotClickHandler = (place_id) => {
     if(selectedParkingID !== place_id){
-       setSelectedParkingID(place_id)
-    setInfoWindowOpen(true)
+        setSelectedParkingID(place_id);
+        setInfoWindowOpen(true);
     }
     else{
-      setInfoWindowOpen(!isInfoWindowOpen)
+        setInfoWindowOpen(!isInfoWindowOpen);
     }
    
-    console.log(place_id)
+    // console.log(place_id)
   }
   
        

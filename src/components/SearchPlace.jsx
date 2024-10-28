@@ -21,8 +21,7 @@ const SearchPlace = ({onPlaceSelect}) => {
   
   return (
     <div>
-    <PlaceAutocomplete onPlaceSelect={setSelectedSpot} />
-      
+    <PlaceAutocomplete onPlaceSelect={setSelectedSpot} />     
     </div>
   )
 }

@@ -1,32 +1,24 @@
 import React, { useState } from 'react';
 import logo from './file.png';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useNavigate } from 'react-router-dom';
+import { auth } from '../../config/firebaseconfig';
+import { signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
-  const navigate = useNavigate();
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
 
-  const handleSignUp = () => {
-    if(isAuthenticated){
-        navigate("/home");
-        return null;     
+  const handlelogout = async()=>{
+    try{
+      await signOut(auth);
+      setIsLoggedIn(false);
     }
-    loginWithRedirect({
-      screen_hint: 'signup',
-    });
-  };
-
-  const handleLogin = () => {
-    if(isAuthenticated){
-      navigate("/home");
-      return null;
+    catch(e){
+      console.log("error signing out",e);
     }
-    loginWithRedirect();
-  };
-
-  if (!isAuthenticated) {
+  }
+  
+  if (!auth.currentUser) {
     return (
       <div className='sticky flex justify-between items-center sm:mx-4 sm:my-2 rounded-lg'>
         <div className='flex items-center'>
@@ -45,8 +37,8 @@ const NavBar = () => {
           <ul className='flex flex-col space-y-4'>
             <li>Company</li>
             <li>Contact</li>
-            <li><button className='w-full text-xl py-2 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} onClick={handleSignUp}>SIGN UP</button></li>
-            <li><button className='w-full text-xl py-2 rounded-full font-extrabold border-black border-2 border-solid' style={{ color: '#000A62' }} onClick={handleLogin}>LOGIN</button></li>
+            <li><button className='w-full text-xl py-2 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} ><Link to={"/signup"}>SIGN UP</Link></button></li>
+            <li><button className='w-full text-xl py-2 rounded-full font-extrabold border-black border-2 border-solid' style={{ color: '#000A62' }}> <Link to={"/login"}>LOG IN</Link></button></li>
           </ul>
         </div>
 
@@ -56,8 +48,8 @@ const NavBar = () => {
             <li>Contact</li>
           </ul>
 
-          <button className='text-xl px-12 py-4 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} onClick={handleSignUp}>SIGN UP</button>
-          <button className='text-xl px-12 py-4 rounded-full font-extrabold border-black border-2 border-solid' style={{ color: '#000A62' }} onClick={handleLogin}>LOGIN</button>
+          <button className='text-xl px-12 py-4 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }}><Link to={"/signup"}>SIGN UP</Link></button>
+          <button className='text-xl px-12 py-4 rounded-full font-extrabold border-black border-2 border-solid' style={{ color: '#000A62' }}><Link to={"/login"}>LOGIN</Link></button>
         </div>
       </div>
     );
@@ -80,7 +72,7 @@ const NavBar = () => {
           <ul className='flex flex-col space-y-4'>
             <li>Company</li>
             <li>Contact</li>
-            <li><button className='w-full text-xl py-2 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} onClick={logout}>Logout</button></li>
+            <li><button className='w-full text-xl py-2 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} onClick={handlelogout}>Logout</button></li>
           </ul>
         </div>
 
@@ -90,7 +82,7 @@ const NavBar = () => {
             <li>Contact</li>
           </ul>
 
-          <button className='text-xl px-12 py-4 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} onClick={logout}>Logout</button>
+          <button className='text-xl px-12 py-4 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }} onClick={handlelogout}>Logout</button>
         </div>
       </div>
     );

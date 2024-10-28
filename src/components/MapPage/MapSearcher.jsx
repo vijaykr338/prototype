@@ -1,25 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useRef, useState,useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import InformationWindow from "./InformationWindow";
-import { InfoWindow } from "@vis.gl/react-google-maps";
-
 import {
   APIProvider,
-  ControlPosition,
-  MapControl,
   AdvancedMarker,
   Map,
-  useMap,
-  useMapsLibrary,
   useAdvancedMarkerRef,
+  useMap,
 } from "@vis.gl/react-google-maps";
 import SideWindow from "./SideWindow";
 import useParkingStore from "./parkingStoreContext";
 import MapHandler from "./MapHandler";
 import NearbyPlaces from "./NearbyPlaces";
-import SearchPlace from "../SearchPlace";
-
+import Directions from "../Directions/Directions";
 import { useLocation } from "react-router-dom";
+import EmbeddedMap from "../EmbeddedMap/EmbeddedMap";
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
@@ -29,23 +24,73 @@ const MapSearcher = () => {
   const isInfoWindowOpen = useParkingStore((state) => state.isInfoWindowOpen);
   const selectedSpot = useParkingStore((state) => state.selectedSpot);
   const setSelectedSpot = useParkingStore((state) => state.setSelectedSpot);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const mapRef = useRef(null); // Ref to hold map instance
+  const selectedParkingID = useParkingStore((state)=> state.selectedParkingID);
+  
 
+  // Get user's current location
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setCurrentLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   if (mapRef.current) {
+  //     setMap(mapRef.current);
+  //   }
+  // }, [mapRef.current]);
+
+
+  // async function getCurrentPosition() {
+  //   if (navigator.geolocation) {
+  //     try {
+  //       const position = await new Promise((resolve, reject) => {
+  //         navigator.geolocation.getCurrentPosition(resolve, reject);
+  //       });
+  //       const Lat = position.coords.latitude;
+  //       const Lng = position.coords.longitude;
+  //       console.log("Latitude: " + Lat + ", Longitude: " + Lng);
+  //       return { Lat, Lng };
+  //     } catch (error) {
+  //       console.error("Error getting position:", error);
+  //       return null;
+  //     }
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //     return null;
+  //   }
+  // }
+  
+  
+  
   return (
     <APIProvider
       apiKey={API_KEY}
       solutionChannel="GMP_devsite_samples_v3_rgmautocomplete"
     >
       <div className="relative h-screen overflow-hidden">
-        <div className="absolute top-0  h-full">
+        <div className="absolute top-0 h-full">
           <Map
             style={{ width: "100vw", height: "100vh" }}
-            //this width is necessary for map working
             mapId={"e43f831b5ad9c238"}
-            // mapId={"fe442564d6c0b923"} to restore map markers
             defaultZoom={3}
             defaultCenter={{ lat: 22.54992, lng: 0 }}
             gestureHandling={"greedy"}
             disableDefaultUI={true}
+            
+           onTilesLoaded={
+            function(event){
+            console.log("on tiles loaded executed");
+              // console.log(event.detail);
+              // console.log(event.map);
+              mapRef.current = event.map;
+           }
+          }
           >
             <AdvancedMarker ref={markerRef} position={null} />
             {selectedSpot && (
@@ -65,18 +110,39 @@ const MapSearcher = () => {
                 setParkingData={setParkingData}
               />
             )}
+
+            {/* Directions component */}
+           
+          
+           {selectedParkingID && (
+            <>
+            <Directions 
+            map={mapRef.current}
+            origin={currentLocation}
+            destination={selectedParkingID}
+            ></Directions>
+
+            
+            </>
+           )}
+            
+             
+          
           </Map>
 
           <MapHandler place={selectedSpot} marker={marker} />
         </div>
 
-        <div className={`flex ${isInfoWindowOpen ? 'w-2/3' : 'w-1/3'} absolute top-0 left-0 h-full z-10`}>
+        <div
+          className={`flex ${
+            isInfoWindowOpen ? "w-2/3" : "w-1/3"
+          } absolute top-0 left-0 h-full z-10`}
+        >
           <div className="w-[600px]">
             <SideWindow
               onPlaceSelect={setSelectedSpot}
               parkingData={parkingData}
             />
-            
           </div>
 
           {isInfoWindowOpen && (
@@ -89,7 +155,5 @@ const MapSearcher = () => {
     </APIProvider>
   );
 };
-
-
 
 export default MapSearcher;
