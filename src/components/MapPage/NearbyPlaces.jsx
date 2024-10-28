@@ -16,10 +16,24 @@ import {
 import SideWindow from "./SideWindow";
 import useParkingStore from "./parkingStoreContext";
 import MapHandler from "./MapHandler";
+import Slider from 'react-slick'; // Ensure you have this import
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 
 const NearbyPlaces = ({ place, setParkingData }) => {
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+
+
     const map = useMap();
     const placesLib = useMapsLibrary("places");
     const selectedSpot = useParkingStore((state)=> state.selectedSpot);
@@ -94,34 +108,49 @@ const NearbyPlaces = ({ place, setParkingData }) => {
   
     return (
       <>
-        {nearbyMarkers.map((marker, index) => (
+       
+    {nearbyMarkers.map((marker, index) => (
           <AdvancedMarker
             key={index}
             position={marker.position}
-            title={marker.name}
+            title="4$"
+            scale="1.5"
             onClick={() => handleMarkerClick(marker)}
-          />
+          >
+            
+            <div className="relative inline-block px-5 py-2 bg-blue-700 text-white text-lg rounded-full hover:bg-white hover:text-blue-700">
+  4$
+  <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-[10px] border-t-blue-700 border-x-[10px] border-x-transparent"></div>
+</div>
+             
+          </AdvancedMarker>
         ))}
   
         {activeMarker && infoContent && (
-          <InfoWindow
-            position={activeMarker}
-            onCloseClick={() => setActiveMarker(null)}
-          >
-            <div>
-              <h2>{infoContent.name}</h2>
-              <p>{infoContent.address}</p>
-              {console.log(infoContent)}
-              {infoContent.photos &&
-                infoContent.photos.map((photo, index) => (
+        <InfoWindow
+        position={activeMarker}
+        onCloseClick={() => setActiveMarker(null)}
+      >
+        <div className="p-2 max-w-xs font-sans">
+          <h2 className="text-lg font-semibold mb-2">{infoContent.name}</h2>
+          <p className="text-sm text-gray-600 mb-2">{infoContent.address}</p>
+          
+          {console.log("Lord forgive me!",infoContent)}
+          {infoContent.photos && (
+            <Slider {...settings}>
+              {infoContent.photos.map((photo, index) => (
+                <div key={index} className="">
                   <img
-                    key={index}
                     src={photo}
                     alt={`${infoContent.name} photo ${index + 1}`}
+                    className="w-full h-auto rounded shadow-md"
                   />
-                ))}
-            </div>
-          </InfoWindow>
+                </div>
+              ))}
+            </Slider>
+          )}
+        </div>
+      </InfoWindow>
         )}
       </>
     );
