@@ -48,8 +48,8 @@ const NavBar = () => {
             <li>Contact</li>
           </ul>
 
-          <button className='text-xl px-12 py-4 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }}><Link to={"/signup"}>SIGN UP</Link></button>
-          <button className='text-xl px-12 py-4 rounded-full font-extrabold border-black border-2 border-solid' style={{ color: '#000A62' }}><Link to={"/login"}>LOGIN</Link></button>
+          <button className='text-lg px-12 py-4 rounded-full text-white font-extrabold' style={{ backgroundColor: '#000A62' }}><Link to={"/signup"}>SIGN UP</Link></button>
+          <button className='text-lg px-12 py-4 rounded-full font-extrabold border-black border-2 border-solid' style={{ color: '#000A62' }}><Link to={"/login"}>LOGIN</Link></button>
         </div>
       </div>
     );
