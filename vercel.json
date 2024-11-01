@@ -1,5 +1,13 @@
 {
-  "rewrites":  [
-    {"source": "/(.*)", "destination": "/"}
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Set-Cookie",
+          "value": "__vercel_live_token=your_token_value; Path=/; SameSite=None; Secure"
+        }
+      ]
+    }
   ]
 }
