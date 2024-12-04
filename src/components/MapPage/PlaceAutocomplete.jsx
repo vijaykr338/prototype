@@ -50,7 +50,7 @@ const PlaceAutocomplete = ({ onPlaceSelect }) => {
       <div className="autocomplete-container">
         <input
           placeholder="Type Address, Venue, City or Place"
-          className="placeholder-slate-600 w-full h-14 px-6 border rounded-full"
+          className="placeholder-slate-600 w-full h-10 px-6 border rounded-full"
           ref={inputRef}
         />
         {/* <CiSearch className="absolute right-10 size-7" /> */}

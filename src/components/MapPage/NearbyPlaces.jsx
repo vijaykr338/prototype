@@ -38,6 +38,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
     const placesLib = useMapsLibrary("places");
     const selectedSpot = useParkingStore((state)=> state.selectedSpot);
     //Places API is our bread and butter for working
+    const setParkingResults = useParkingStore((data)=> data.setParkingResults)
     const [nearbyMarkers, setNearbyMarkers] = useState([]);
     const [activeMarker, setActiveMarker] = useState(null);
     const [infoContent, setInfoContent] = useState(null);
@@ -72,6 +73,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
               : [], // extract photo URLs
           }));
           setParkingData(results);
+          setParkingResults(results);
           setNearbyMarkers(markers);
         } else {
           console.error("Nearby search failed:", status);
@@ -118,7 +120,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
             onClick={() => handleMarkerClick(marker)}
           >
             
-            <div className="relative inline-block px-5 py-2 bg-blue-700 text-white text-lg rounded-full hover:bg-white hover:text-blue-700">
+            <div className="relative inline-block px-3 py-2 bg-blue-700 text-white text-lg rounded-full hover:bg-white hover:text-blue-700">
   4$
   <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-[10px] border-t-blue-700 border-x-[10px] border-x-transparent"></div>
 </div>
