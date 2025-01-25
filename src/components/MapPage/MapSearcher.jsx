@@ -13,43 +13,21 @@ import useParkingStore from "./parkingStoreContext";
 import MapHandler from "./MapHandler";
 import NearbyPlaces from "./NearbyPlaces";
 import Directions from "../Directions/Directions";
+import { AnimatePresence, motion } from "motion/react"
 import { useLocation } from "react-router-dom";
-import SearchPlace from "../SearchPlace";
-import { IoClose } from "react-icons/io5";
-import { useSpring, animated } from "@react-spring/web";
-import { useDrag } from "@use-gesture/react";
-import ParkingSpots from "./ParkingSpots";
 import EmbeddedMap from "../EmbeddedMap/EmbeddedMap";
-import PlaceAutocomplete from "./PlaceAutocomplete";
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 const MapSearcher = () => {
   const [parkingData, setParkingData] = useState([]);
   const [markerRef, marker] = useAdvancedMarkerRef();
-  const parkingResults = useParkingStore((data) => data.parkingResults);
   const isInfoWindowOpen = useParkingStore((state) => state.isInfoWindowOpen);
   const selectedSpot = useParkingStore((state) => state.selectedSpot);
   const setSelectedSpot = useParkingStore((state) => state.setSelectedSpot);
   const [currentLocation, setCurrentLocation] = useState(null);
   const mapRef = useRef(null); // Ref to hold map instance
   const selectedParkingID = useParkingStore((state) => state.selectedParkingID);
-
-  const [{ y }, api] = useSpring(() => ({ y: window.innerHeight - 100, display: 'block' }));
-
-  const bind = useDrag(({ down, movement: [, my] }) => {
-    if (down) {
-      api.start({ y: my < 0 ? 0 : my });
-    } else {
-      api.start({
-        y: my < window.innerHeight / 2 ? 0 : window.innerHeight - 100,
-      });
-    }
-  });
-
-  const closeDiv = () => {
-    api.start({ y: window.innerHeight - 100, display: 'none' });
-  };
 
   // Get user's current location
   useEffect(() => {
@@ -61,13 +39,40 @@ const MapSearcher = () => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   if (mapRef.current) {
+  //     setMap(mapRef.current);
+  //   }
+  // }, [mapRef.current]);
+
+  // async function getCurrentPosition() {
+  //   if (navigator.geolocation) {
+  //     try {
+  //       const position = await new Promise((resolve, reject) => {
+  //         navigator.geolocation.getCurrentPosition(resolve, reject);
+  //       });
+  //       const Lat = position.coords.latitude;
+  //       const Lng = position.coords.longitude;
+  //       console.log("Latitude: " + Lat + ", Longitude: " + Lng);
+  //       return { Lat, Lng };
+  //     } catch (error) {
+  //       console.error("Error getting position:", error);
+  //       return null;
+  //     }
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //     return null;
+  //   }
+  // }
+
   return (
     <APIProvider
       apiKey={API_KEY}
       solutionChannel="GMP_devsite_samples_v3_rgmautocomplete"
+     
     >
-      <div className="relative h-screen overflow-hidden">
-        <div className="absolute top-0 w-full h-full">
+     <div className="relative w-screen h-screen overflow-hidden">
+     <div className="w-full h-full">
           <Map
             style={{ width: "100vw", height: "100vh" }}
             mapId={"e43f831b5ad9c238"}
@@ -75,19 +80,27 @@ const MapSearcher = () => {
             defaultCenter={{ lat: 22.54992, lng: 0 }}
             gestureHandling={"greedy"}
             disableDefaultUI={true}
-            className=""
+            onTilesLoaded={function (event) {
+              console.log("on tiles loaded executed");
+              // console.log(event.detail);
+              // console.log(event.map);
+              mapRef.current = event.map;
+            }}
           >
             <AdvancedMarker ref={markerRef} position={null} />
             {selectedSpot && (
               <AdvancedMarker
                 position={selectedSpot.geometry?.location}
                 title="Selected Location"
-              >
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
-                  S
-                </div>
-              </AdvancedMarker>
+                options={{
+                  icon: {
+                    url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png", // URL for red marker
+                    scaledSize: new google.maps.Size(32, 32), // Resize if necessary
+                  },
+                }}
+              />
             )}
+
             {selectedSpot && (
               <NearbyPlaces
                 place={selectedSpot}
@@ -96,13 +109,15 @@ const MapSearcher = () => {
               />
             )}
 
+            {/* Directions component */}
+
             {selectedParkingID && (
               <>
                 <Directions
                   map={mapRef.current}
                   origin={currentLocation}
                   destination={selectedParkingID}
-                />
+                ></Directions>
               </>
             )}
           </Map>
@@ -110,44 +125,37 @@ const MapSearcher = () => {
           <MapHandler place={selectedSpot} marker={marker} />
         </div>
 
-        <div className="absolute top-0 w-full p-4 z-20 md:hidden">
-          <SearchPlace />
-        </div>
+        <motion.div
+    className="flex absolute top-0 left-0 h-full z-10"
+    animate={{ width: isInfoWindowOpen ? "66.666667%" : "33.333333%" }}
+    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+  >
+    <motion.div
+      initial={{ x: -600 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      className="w-[600px]"
+    >
+      <SideWindow
+        onPlaceSelect={setSelectedSpot}
+        parkingData={parkingData}
+      />
+    </motion.div>
 
-        <animated.div
-          {...bind()}
-          style={{ y }}
-          className="absolute bottom-0 w-full p-4 z-50 bg-white rounded-t-xl h-full md:h-[40%] overflow-y-auto shadow-lg"
+    <AnimatePresence>
+      {isInfoWindowOpen && (
+        <motion.div
+          initial={{ x: -600 }}
+          animate={{ x: 0 }}
+          exit={{ x: -600 }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          className="w-[600px] bg-white h-screen"
         >
-          <div className="mt-4 px-4 rounded-xl bg-white">
-            <div className="flex justify-between items-center border-b pb-3 mb-3">
-              <h1 className="font-raleway text-lg font-medium text-gray-800">
-                Parking Near Your Searched Place
-              </h1>
-              <button
-                onClick={closeDiv}
-                className="text-gray-600 font-bold hover:text-gray-800 transition"
-              >
-                <IoClose size={40}/>
-              </button>
-            </div>
-            <ParkingSpots parkingData={parkingResults} />
-          </div>
-        </animated.div>
-
-       
-
-        <div className={`flex ${isInfoWindowOpen ? "w-2/3" : "w-1/3"} absolute top-0 left-0 h-full md:z-10 z-60`}>
-          <div className="w-[600px]">
-            <SideWindow onPlaceSelect={setSelectedSpot} parkingData={parkingData} />
-          </div>
-
-          {isInfoWindowOpen && (
-            <div className="w-full md:w-2/3 h-full">
-              <InformationWindow />
-            </div>
-          )}
-        </div>
+          <InformationWindow />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </motion.div>
       </div>
     </APIProvider>
   );
