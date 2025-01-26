@@ -22,7 +22,7 @@ const SignUp = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate('/home');  // Redirect authenticated users to dashboard
+        navigate('/');  // Redirect authenticated users to dashboard
       }
     });
 

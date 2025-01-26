@@ -12,6 +12,7 @@ import EmbeddedMap from './components/EmbeddedMap/EmbeddedMap'
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 function App() {
+  
   return (
     
     <div>

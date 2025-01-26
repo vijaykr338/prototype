@@ -13,7 +13,8 @@ const firebaseConfig = {
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
 };
-
+console.log("gmaps api key",process.env.GOOGLE_MAPS_API_KEY);
+console.log("firebase api key",firebaseConfig.apiKey);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

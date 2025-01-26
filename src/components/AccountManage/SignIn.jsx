@@ -21,7 +21,7 @@ const SignIn = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate('/home');  // Redirect authenticated users to dashboard
+        navigate('/');  // Redirect authenticated users to home
       }
     });
 
@@ -48,7 +48,7 @@ const SignIn = () => {
     // You can add form submission logic here
     try{
       await signInWithEmailAndPassword(auth,formData.emailId,formData.yourPassword);
-      navigate("/home")
+      navigate("/")
     
     }
     catch(e){
@@ -64,7 +64,7 @@ const SignIn = () => {
     // You can add form submission logic here
     try{
       await signInWithPopup(auth,GoogleProvider);
-      navigate("/home")
+      navigate("/")
     
     }
     catch(e){
