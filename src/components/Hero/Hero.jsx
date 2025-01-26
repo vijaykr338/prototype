@@ -17,7 +17,7 @@ const Hero = () => {
                 <div className='sm:text-7xl text-4xl font-roboto font-bold'>   <p>In a Hurry? <br />
                 PARK It Up!</p>
                 </div>
-            <SearchPlace/>
+            <SearchPlace />
             </div>
 
         </div>
