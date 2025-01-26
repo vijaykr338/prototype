@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useMapsLibrary, useMap } from "@vis.gl/react-google-maps";
-import { FaStar, FaWalking, FaCar, FaCreditCard } from "react-icons/fa";
+import { FaStar, FaWalking, FaCar, FaCreditCard, FaArrowLeft } from "react-icons/fa";
 import { PiPhoneCallLight } from "react-icons/pi";
 import { CiClock2 } from "react-icons/ci";
 import { FaGooglePay, FaApplePay } from "react-icons/fa";
@@ -15,6 +15,7 @@ import "slick-carousel/slick/slick-theme.css";
 const InformationWindow = () => {
   const selectedParkingID = useParkingStore((state) => state.selectedParkingID);
   const isInfoWindowOpen = useParkingStore((state) => state.isInfoWindowOpen);
+  const setInfoWindowOpen = useParkingStore((state) => state.setInfoWindowOpen);
   const [infoContent, setInfoContent] = useState(null);
   const placesLib = useMapsLibrary("places");
   const map = useMap();
@@ -27,6 +28,10 @@ const InformationWindow = () => {
     slidesToScroll: 1,
     arrows: infoContent?.photos?.length > 1,
   };
+
+  const handleReturn = () => {
+    setInfoWindowOpen(!isInfoWindowOpen);
+  }
 
   useEffect(() => {
     if (!selectedParkingID) return;
@@ -63,21 +68,29 @@ const InformationWindow = () => {
   if (!isInfoWindowOpen || !infoContent) return null;
 
   return (
-    <div className="bg-white font-raleway shadow-2xl overflow-y-auto overflow-x-hidden max-h-screen w-full">
+    <div className="bg-white font-raleway relative shadow-2xl overflow-y-auto overflow-x-hidden max-h-screen w-full">
+       <button
+      onClick={() => setInfoWindowOpen(false)}
+      className="absolute top-4 left-4 z-50 bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors"
+    >
+      <FaArrowLeft className="w-5 h-5 text-white" />
+    </button>
+     
+     
       {infoContent.photos && infoContent.photos.length > 0 && (
-         <div className="w-full">
-         <Slider {...settings}>
-           {infoContent.photos.map((photo, index) => (
-             <div key={index} className="w-full aspect-[4/3]">
-               <img
-                 src={photo}
-                 alt={`${infoContent.name} photo ${index + 1}`}
-                 className="w-full h-full object-cover"
-               />
-             </div>
-           ))}
-         </Slider>
-       </div>
+        <div className="w-full relative">
+        <Slider {...settings}>
+          {infoContent.photos.map((photo, index) => (
+            <div key={index} className="w-full aspect-[4/3]">
+              <img
+                src={photo}
+                alt={`${infoContent.name}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
       )}
 
       <div className="p-6 space-y-6">
