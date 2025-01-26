@@ -10,6 +10,7 @@ import SignIn from './components/AccountManage/SignIn.jsx';
 import SignUp from './components/AccountManage/SignUp.jsx';
 import Home from './components/Home/Home.jsx';
 import MapSearcher from './components/MapPage/MapSearcher.jsx';
+import Forgot from './components/AccountManage/Forgot.jsx';
 
 
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/search-for-parking",
     element: <MapSearcher/>
+  },
+  {
+    path: "/forgot-password",
+    element: <Forgot/>
   }
 ]);
 

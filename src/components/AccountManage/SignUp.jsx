@@ -8,7 +8,7 @@ import SignIn from './SignIn';
 import { auth ,GoogleProvider} from '../../config/firebaseconfig';
 import {createUserWithEmailAndPassword , signInWithPopup} from "firebase/auth"
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 
 
 const SignUp = () => {
@@ -19,6 +19,15 @@ const SignUp = () => {
     emailId: '',
     yourPassword: ''
   });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/home');  // Redirect authenticated users to dashboard
+      }
+    });
+
+    return () => unsubscribe();  // Cleanup function to avoid memory leaks
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +44,7 @@ const SignUp = () => {
     try{
 
       await createUserWithEmailAndPassword(auth,formData.emailId,formData.yourPassword);
-      navigate("/home");
+      navigate("/login");
     }
     catch(e){
       console.log("some err",e);
@@ -46,7 +55,7 @@ const SignUp = () => {
     e.preventDefault();
     try{
       await signInWithPopup(auth,GoogleProvider); 
-      navigate("/home");
+      navigate("/login");
     }
     catch(e){
       console.log("some err",e);
