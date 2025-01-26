@@ -37,9 +37,11 @@ const PlaceAutocomplete = ({ onPlaceSelect, className }) => {
   return (
     <div className={`relative ${className}`}>
       <div className={`
+        my-5
         flex items-center 
         bg-white 
-        rounded-lg
+        border
+        rounded-full
         overflow-hidden
         transition-all duration-300 ease-in-out
         ${isFocused ? 'shadow-lg ring-2 ring-blue-400' : 'shadow-md hover:shadow-lg'}
@@ -49,7 +51,7 @@ const PlaceAutocomplete = ({ onPlaceSelect, className }) => {
             w-5 h-5 
             transition-colors duration-300
             ${isFocused ? 'text-blue-500' : 'text-gray-400'}
-          `}/>
+          `} />
         </div>
 
         <input
