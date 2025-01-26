@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState ,useEffect} from 'react'
 import car from "./caro2.png"
 import { BiHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
@@ -18,6 +18,15 @@ const SignIn = () => {
     loggedIn: false
   });
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/home');  // Redirect authenticated users to dashboard
+      }
+    });
+
+    return () => unsubscribe();  // Cleanup function to avoid memory leaks
+  }, []);
 
 
   const handleChange = (e) => {
@@ -144,10 +153,14 @@ const SignIn = () => {
               <p className='font-semibold px-2'>Sign in with Google</p>
               <FcGoogle className='text-2xl' />
             </a>
-
+            
             <p className='flex justify-center my-5 '>
               <span>Need an account? </span>
               <Link to="/sign-up" className='px-2 text-blue-500 font-semibold underline'>Create one</Link>
+            </p>
+
+            <p className='flex justify-center my-5 '>
+              <Link to="/forgot-password" className='px-2 text-blue-500 font-semibold underline'>Forgot Password</Link>
             </p>
           </div>
         </div>
