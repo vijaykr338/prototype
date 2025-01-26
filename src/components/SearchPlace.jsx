@@ -20,7 +20,7 @@ const SearchPlace = ({onPlaceSelect}) => {
 
   
   return (
-    <div className='border-2 border-solid border-black rounded-full'>
+    <div className=''>
     <PlaceAutocomplete onPlaceSelect={setSelectedSpot} />     
     </div>
   )
