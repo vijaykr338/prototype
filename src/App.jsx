@@ -1,7 +1,6 @@
 import NavBar from './components/Nav/NavBar'
 import Hero from './components/Hero/Hero'
 import Car from './components/Hero/Car'
-// import Features from './components/Features/Features'
 import SocialMedia from './components/Footer/SocialMedia'
 import Footer from './components/Footer/Footer'
 import { APIProvider } from '@vis.gl/react-google-maps'
@@ -12,7 +11,7 @@ import EmbeddedMap from './components/EmbeddedMap/EmbeddedMap'
 import WhyChoose from './components/LandingPage/WhyChoose'
 import HowItWorks from './components/LandingPage/HowItWorks'
 import Features from './components/LandingPage/Features'
-import Testimonials from './components/LandingPage/Testimonials'
+// import Testimonials from './components/LandingPage/Testimonials'
 import FAQ from './components/LandingPage/FAQ'
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
@@ -30,7 +29,7 @@ function App() {
         <WhyChoose />
         <HowItWorks />
         <Features></Features>
-        <Testimonials />
+        {/* <Testimonials /> */}
         <FAQ />
         <SocialMedia></SocialMedia>
         <Footer></Footer>
