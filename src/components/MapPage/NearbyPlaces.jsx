@@ -11,6 +11,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+
 const NearbyPlaces = ({ place, setParkingData }) => {
   const settings = {
     dots: false,
@@ -28,6 +29,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
   const [activeMarker, setActiveMarker] = useState(null);
   const [infoContent, setInfoContent] = useState(null);
   const [hoveredMarker, setHoveredMarker] = useState(null);
+  
 
   useEffect(() => {
     if (!placesLib || !map || !place) return;

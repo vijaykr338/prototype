@@ -7,10 +7,10 @@ const Car = () => {
     <div className='overflow-hidden'>
         <motion.div
          animate={{
-            x: ['0%', '100%'],
+            x: ['-50%', '100%'],
           }}
           transition={{
-            duration: 3, 
+            duration: 4, 
             repeat: Infinity, 
             repeatType: "loop", 
             ease: "linear" 

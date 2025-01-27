@@ -11,6 +11,7 @@ import SignUp from './components/AccountManage/SignUp.jsx';
 import Home from './components/Home/Home.jsx';
 import MapSearcher from './components/MapPage/MapSearcher.jsx';
 import Forgot from './components/AccountManage/Forgot.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 
 
@@ -50,6 +51,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ErrorBoundary>
     <RouterProvider router={router} />
+    </ErrorBoundary>
   </React.StrictMode>,
 )

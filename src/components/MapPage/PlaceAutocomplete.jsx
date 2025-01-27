@@ -23,16 +23,24 @@ const PlaceAutocomplete = ({ onPlaceSelect, className }) => {
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));
   }, [places]);
 
+  
   useEffect(() => {
     if (!placeAutocomplete) return;
-
+  
     placeAutocomplete.addListener("place_changed", () => {
       const place = placeAutocomplete.getPlace();
+  
+      // Check if the selected place has the required data
+      if (!place || !place.geometry || !place.formatted_address) {
+        console.error("Invalid place selected or no place data available.");
+        return;
+      }
+  
       onPlaceSelect(place);
       setSelectedSpot(place);
-      navigate("/search-for-parking");
+      navigate("/search-for-parking"); // Navigate only when a valid place is selected
     });
-  }, [onPlaceSelect, placeAutocomplete]);
+  }, [onPlaceSelect, placeAutocomplete, navigate, setSelectedSpot]);
 
   return (
     <div className={`relative ${className}`}>
@@ -55,21 +63,26 @@ const PlaceAutocomplete = ({ onPlaceSelect, className }) => {
         </div>
 
         <input
-          ref={inputRef}
-          type="text"
-          placeholder="Search for parking near..."
-          className="
-            w-full 
-            py-3 px-3
-            text-gray-700 
-            placeholder-gray-400
-            focus:outline-none
-            transition-all
-            duration-300
-          "
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-        />
+  ref={inputRef}
+  type="text"
+  placeholder="Search for parking near..."
+  className="
+    w-full 
+    py-3 px-3
+    text-gray-700 
+    placeholder-gray-400
+    focus:outline-none
+    transition-all
+    duration-300
+  "
+  onFocus={() => setIsFocused(true)}
+  onBlur={() => setIsFocused(false)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Disable the default behavior of Enter key
+    }
+  }}
+/>
 
       </div>
 
