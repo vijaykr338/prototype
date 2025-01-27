@@ -7,10 +7,10 @@ const Hero = () => {
    
 
     return (
-        <div className='sm:flex justify-between overflow-hidden'>
+        <div className='sm:flex justify-between items-center overflow-hidden'>
 
             <div className='image'>
-                <img src={group} />
+                <img src={group} className='responsive-image' />
             </div>
 
             <div className='header sm:px-20 sm:mx-28 sm:my-16 text-center sm:w-3/6'>
