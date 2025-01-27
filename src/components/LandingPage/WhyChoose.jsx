@@ -1,5 +1,8 @@
 import React from "react"
-import { Clock, CreditCard, MapPin } from "lucide-react"
+
+import { FaRegClock } from "react-icons/fa6";
+import { FaCreditCard } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 
 function WhyChoose() {
   return (
@@ -9,7 +12,7 @@ function WhyChoose() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-6 transition-transform hover:scale-105">
             <div className="flex flex-col items-center space-y-4">
-              <Clock className="w-12 h-12 text-blue-600" />
+              <FaRegClock className="w-12 h-12 text-blue-600" />
               <h3 className="text-2xl font-bold text-center">Save Time</h3>
               <p className="text-gray-500 text-center">
                 No more circling for parking. Book in advance and drive straight to your spot.
@@ -18,7 +21,7 @@ function WhyChoose() {
           </div>
           <div className="p-6 transition-transform hover:scale-105">
             <div className="flex flex-col items-center space-y-4">
-              <CreditCard className="w-12 h-12 text-blue-600" />
+              <FaCreditCard className="w-12 h-12 text-blue-600" />
               <h3 className="text-2xl font-bold text-center">Save Money</h3>
               <p className="text-gray-500 text-center">
                 Get the best rates with our competitive pricing and exclusive discounts.
@@ -27,7 +30,7 @@ function WhyChoose() {
           </div>
           <div className="p-6 transition-transform hover:scale-105">
             <div className="flex flex-col items-center space-y-4">
-              <MapPin className="w-12 h-12 text-blue-600" />
+              <FaLocationDot className="w-12 h-12 text-blue-600" />
               <h3 className="text-2xl font-bold text-center">Nationwide Coverage</h3>
               <p className="text-gray-500 text-center">Find parking spots in all major cities across India.</p>
             </div>
