@@ -71,7 +71,7 @@ const InformationWindow = () => {
     <div className="bg-white font-raleway relative shadow-2xl overflow-y-auto overflow-x-hidden max-h-screen w-full">
        <button
       onClick={() => setInfoWindowOpen(false)}
-      className="absolute top-4 left-4 z-50 bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors"
+      className="absolute top-4 left-4 z-40 bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors"
     >
       <FaArrowLeft className="w-5 h-5 text-white" />
     </button>
