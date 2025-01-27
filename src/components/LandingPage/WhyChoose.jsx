@@ -8,7 +8,7 @@ function WhyChoose() {
   return (
     <section id="features" className="py-12 md:py-18 my-10 bg-white">
       <div className="container max-w-7xl px-4 md:px-6 mx-auto">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Why Choose ParkItUp?</h2>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Why Choose Park It Up ?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-6 transition-transform hover:scale-105">
             <div className="flex flex-col items-center space-y-4">
