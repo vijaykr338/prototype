@@ -39,7 +39,9 @@ const NearbyPlaces = ({ place, setParkingData }) => {
     const request = {
       location: place.geometry.location,
       radius: 750,
-      type: ["parking"],
+      // type: ["parking"], I don't know what the fuck happpend 
+      //but now below works, above does not 
+      keyword: "parking",
       fields: ["geometry", "name", "place_id", "vicinity"],
     };
 
