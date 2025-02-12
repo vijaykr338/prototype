@@ -10,7 +10,7 @@ import useParkingStore from "./parkingStoreContext";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { enhanceMarkersWithParkingData } from "./utills/parkingDataUtil";
 
 const NearbyPlaces = ({ place, setParkingData }) => {
   const settings = {
@@ -32,10 +32,10 @@ const NearbyPlaces = ({ place, setParkingData }) => {
   
 
   useEffect(() => {
-    if (!placesLib || !map || !place) return;
+    if (!placesLib || !map || !place) return; 
 
     const service = new placesLib.PlacesService(map);
-
+    console.log("Lord fogvive", place)
     const request = {
       location: place.geometry.location,
       radius: 750,
@@ -49,23 +49,30 @@ const NearbyPlaces = ({ place, setParkingData }) => {
       if (status === placesLib.PlacesServiceStatus.OK) {
         const PhotoOptions = { maxHeight: 300 };
 
-        const markers = results.map((result) => ({
+        const enhancedMarkers = enhanceMarkersWithParkingData(results);
+        
+      
+        const markers = enhancedMarkers.map((result) => ({
           position: result.geometry.location,
-          name: result.name,
-          address: result.vicinity,
-          placeId: result.place_id,
-          photos: result.photos
-            ? result.photos.map((photo) => photo.getUrl(PhotoOptions))
-            : [],
+          title: result.parkingName || result.name,
+          price: result.price,
+          timings: result.timings,
+          highlights: result.highlights,
+          distance: result.distance,
+          navigationLink: result.navigationLink,
+          placeId:result.placeId
         }));
 
         if (results.length > 0) {
           map.panTo(results[0].geometry.location);
           map.setZoom(17); // Adjust map to first result
         }
-
-        setParkingData(results);
+        // console.log("Unlimited", enhancedMarkers)
+        // console.log("Extra", markers)
+        // console.log("Alternative",results)
+        setParkingData(enhancedMarkers);
         setNearbyMarkers(markers);
+        console.log("this is not fate",nearbyMarkers)
       } else {
         console.error("Nearby search failed:", status);
       }
@@ -89,6 +96,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
             rating: place.rating,
             photos: marker.photos,
             placeId: marker.placeId,
+            price: marker.price
           });
         } else {
           console.error("Failed to fetch place details:", status);
@@ -114,7 +122,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
                 : "bg-white text-blue-600 border-2 border-blue-600"
             }`}
           >
-            ₹90
+            {marker.price}
             <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-[12px] border-t-blue-600 border-x-[12px] border-x-transparent"></div>
           </div>
         </AdvancedMarker>
@@ -187,7 +195,7 @@ const NearbyPlaces = ({ place, setParkingData }) => {
 
               <div className="flex items-center justify-between pt-1.5 border-t border-gray-100">
                 <span className="text-sm font-bold text-blue-600">
-                  ₹90/hour
+                  {infoContent.price}/hour
                 </span>
                 <button className="bg-blue-600 text-white text-xs px-2.5 py-1 rounded font-medium">
                   Book Now

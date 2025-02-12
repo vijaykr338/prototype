@@ -38,6 +38,7 @@ const PlaceAutocomplete = ({ onPlaceSelect, className }) => {
   
       onPlaceSelect(place);
       setSelectedSpot(place);
+      console.log("This is it", place)
       navigate("/search-for-parking"); // Navigate only when a valid place is selected
     });
   }, [onPlaceSelect, placeAutocomplete, navigate, setSelectedSpot]);

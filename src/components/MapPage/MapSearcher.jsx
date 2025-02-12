@@ -6,7 +6,7 @@ import {
   AdvancedMarker,
   Map,
   useAdvancedMarkerRef,
-  useMap,
+  
 } from "@vis.gl/react-google-maps";
 import SideWindow from "./SideWindow";
 import useParkingStore from "./parkingStoreContext";
@@ -14,8 +14,7 @@ import MapHandler from "./MapHandler";
 import NearbyPlaces from "./NearbyPlaces";
 import Directions from "../Directions/Directions";
 import { AnimatePresence, motion } from "motion/react"
-import { useLocation } from "react-router-dom";
-import EmbeddedMap from "../EmbeddedMap/EmbeddedMap";
+
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
@@ -31,6 +30,7 @@ const MapSearcher = () => {
 
   // Get user's current location
   useEffect(() => {
+    
     navigator.geolocation.getCurrentPosition((position) => {
       setCurrentLocation({
         lat: position.coords.latitude,
@@ -39,31 +39,6 @@ const MapSearcher = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (mapRef.current) {
-  //     setMap(mapRef.current);
-  //   }
-  // }, [mapRef.current]);
-
-  // async function getCurrentPosition() {
-  //   if (navigator.geolocation) {
-  //     try {
-  //       const position = await new Promise((resolve, reject) => {
-  //         navigator.geolocation.getCurrentPosition(resolve, reject);
-  //       });
-  //       const Lat = position.coords.latitude;
-  //       const Lng = position.coords.longitude;
-  //       console.log("Latitude: " + Lat + ", Longitude: " + Lng);
-  //       return { Lat, Lng };
-  //     } catch (error) {
-  //       console.error("Error getting position:", error);
-  //       return null;
-  //     }
-  //   } else {
-  //     console.error("Geolocation is not supported by this browser.");
-  //     return null;
-  //   }
-  // }
 
   return (
     <APIProvider
@@ -81,9 +56,9 @@ const MapSearcher = () => {
             gestureHandling={"greedy"}
             disableDefaultUI={true}
             onTilesLoaded={function (event) {
-              console.log("on tiles loaded executed");
-              // console.log(event.detail);
-              // console.log(event.map);
+              // console.log("on tiles loaded executed");
+              // // console.log(event.detail);
+              // // console.log(event.map);
               mapRef.current = event.map;
             }}
           >

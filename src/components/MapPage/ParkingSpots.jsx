@@ -26,10 +26,23 @@ const ParkingSpots = ({ parkingData }) => {
     }
   };
 
+  
   return (
     <div className="sm:space-y-5 space-y-3 am:p-1 m-1  sm:p-2 ">
       {parkingData &&
-        parkingData.map((parking) => (
+        parkingData.sort((a, b) => {
+          const aHasPrice = a.price !== "NA";
+          const bHasPrice = b.price !== "NA";
+          
+          if (aHasPrice && !bHasPrice) return -1;
+          if (!aHasPrice && bHasPrice) return 1;
+          
+          if (aHasPrice && bHasPrice) {
+            return parseInt(a.price) - parseInt(b.price);
+          }
+          
+          return 0;
+        }).map((parking) => (
           <div
             key={parking.place_id}
             onClick={() => ParkingSpotClickHandler(parking.place_id)}
@@ -85,7 +98,7 @@ const ParkingSpots = ({ parkingData }) => {
 
                 {/* Price Section */}
                 <div className="sm:text-3xl text-xl space-x-2 flex items-center font-bold text-blue-600">
-                  40 ₹{" "}
+                  {parking.price}{" "}
                   <span className="sm:text-xl text-sm text-gray-500">
                     /hour
                   </span>

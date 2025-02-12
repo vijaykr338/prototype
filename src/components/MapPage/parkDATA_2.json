@@ -1,0 +1,154 @@
+[
+   {
+      "TARGETED_AREA": "",
+      "ADDRESS": [],
+      "RESULTS": []
+   },
+   {
+      "TARGETED_AREA": "Rajiv Chowk, Delhi",
+      "ADDRESS": [
+         "Rajiv Chowk metro",
+         "india gate delhi",
+         "janpath",
+         "bangla sahib road",
+         "rajiv chock delhi"
+      ],
+      "RESULTS": [
+         {
+            "NAME": "DMRC Parking near Gate Number 1",
+            "SHORT_ADDRESS": "Patel Chowk Delhi 110001",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.622906,77.214544&travelmode=driving",
+            "DISTANCE": "12 mtr",
+            "TIMING_DATA": "You can park at this site only between 12:00 AM & 11:59 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": "Covered parking\nSecured parking\nDisabled person parking",
+            "PRICE": "30"
+         },
+         {
+            "NAME": "RML Hopital Parking near Nursing Home",
+            "SHORT_ADDRESS": "Dr Ram Manohar Lohia Hospital Delhi 110001",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.625096,77.200788&travelmode=driving",
+            "DISTANCE": "1.4 km",
+            "TIMING_DATA": "You can park at this site only between 06:00 AM & 11:16 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": null,
+            "PRICE": "20"
+         },
+         {
+            "NAME": "RML Hospital Parking near Gate Number 6",
+            "SHORT_ADDRESS": "RML Hospital Delhi 110001",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.626856,77.200638&travelmode=driving",
+            "DISTANCE": "1.4 km",
+            "TIMING_DATA": "You can park at this site only between 06:00 AM & 11:16 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": null,
+            "PRICE": "20"
+         },
+         {
+            "NAME": "RML Hospital psychiatrist Building",
+            "SHORT_ADDRESS": "RML Hospital",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.624734,77.199825&travelmode=driving",
+            "DISTANCE": "1.5 km",
+            "TIMING_DATA": "You can park at this site only between 10:00 AM & 09:00 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": null,
+            "PRICE": "20"
+         },
+         {
+            "NAME": "Parking In Side RML Hospital",
+            "SHORT_ADDRESS": "Baba Kharak Singh Rd Near Gurudwara Bangla Sahib Ram Manohar Lohia Hospital Type III Connaught Place",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.626041,77.200027&travelmode=driving",
+            "DISTANCE": "1.5 km",
+            "TIMING_DATA": "You can park at this site only between 06:00 AM & 11:16 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": null,
+            "PRICE": "20"
+         },
+         {
+            "NAME": "NDMC Car Parking G-36, Radial Rd Number Connaught Place",
+            "SHORT_ADDRESS": "Palika Parking G 36 Radial Rd Number 2 above Connaught Place Block G Connaught Place New Delhi Delhi 110001",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.631795,77.217331&travelmode=driving",
+            "DISTANCE": "1.0 km",
+            "TIMING_DATA": null,
+            "HIGHLIGHTS": "Secured parking",
+            "PRICE": "40"
+         },
+         {
+            "NAME": "RML Hospital Emergency Gate",
+            "SHORT_ADDRESS": "Baba Kharak Singh Rd near Gurudwara Bangla Sahib Ram Manohar Lohia Hospital Type III Connaught Place New Delhi Delhi 110001",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.625888,77.202807&travelmode=driving",
+            "DISTANCE": "1.2 km",
+            "TIMING_DATA": null,
+            "HIGHLIGHTS": null,
+            "PRICE": "80"
+         },
+         {
+            "NAME": "RML Hospital near OPD Gate No 3",
+            "SHORT_ADDRESS": "RML Hospital ,Delhi 110001",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.624956,77.201538&travelmode=driving",
+            "DISTANCE": "1.3 km",
+            "TIMING_DATA": null,
+            "HIGHLIGHTS": null,
+            "PRICE": "20"
+         },
+         {
+            "NAME": "MCD Lift Parking Behind Sheela Cinema- Paharganj",
+            "SHORT_ADDRESS": "Behind Sheela Cinema lift Parking in front of St Anthony Girls Senior Secondary School",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.645083,77.216667&travelmode=driving",
+            "DISTANCE": "1.1 km",
+            "TIMING_DATA": "You can park at this site only between 12:00 AM & 11:59 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": "Covered parking\nSecured parking\nDisabled person parking",
+            "PRICE": "40"
+         },
+         {
+            "NAME": "NDMC Stag Parking - Paharganj",
+            "SHORT_ADDRESS": "Arya Nagar Paharganj New Delhi Delhi",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.6452652,77.2168314&travelmode=driving",
+            "DISTANCE": "1.2 km",
+            "TIMING_DATA": "You can park at this site only between 12:00 AM & 11:59 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": "Covered parking",
+            "PRICE": "30"
+         },
+         {
+            "NAME": "NDMC Parking Near Ramlila Maidan",
+            "SHORT_ADDRESS": "31 asaf Ali Road kamla Market Ajmeri Gate",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.643261,77.227633&travelmode=driving",
+            "DISTANCE": "1.5 km",
+            "TIMING_DATA": "You can park at this site only between 12:00 AM & 11:59 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": "Covered parking\nSecured parking",
+            "PRICE": "30"
+         },
+         {
+            "NAME": "NDMC Nutan Marathi School Karolbagh Zone-Paharganj",
+            "SHORT_ADDRESS": "Type 1 Walchand Place Aram Bagh Jhandewalan Paharganj New Delhi Delhi 110055",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.64558559,77.20764309&travelmode=driving",
+            "DISTANCE": "1.5 km",
+            "TIMING_DATA": "You can park at this site only between 12:00 AM & 11:59 PM. Change your time slots for making a booking",
+            "HIGHLIGHTS": null,
+            "PRICE": "40"
+         },
+         {
+            "NAME": "NDLS Railway Station near Ajmeri Gate General Parking",
+            "SHORT_ADDRESS": "Ajmeri Gate, New Delhi, Delhi, 110002",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.644837,77.221488&travelmode=driving",
+            "DISTANCE": "1.2 km",
+            "TIMING_DATA": null,
+            "HIGHLIGHTS": "Secured parking",
+            "PRICE": "50"
+         },
+         {
+            "NAME": "Parking Near Ramlila Maidan-Ajmeri Gate",
+            "SHORT_ADDRESS": "Ramlila Maidan Ajmeri Gate",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.643046,77.227808&travelmode=driving",
+            "DISTANCE": "1.5 km",
+            "TIMING_DATA": null,
+            "HIGHLIGHTS": "Secured parking",
+            "PRICE": "30"
+         },
+         {
+            "NAME": "ITPO Authorized Parking",
+            "SHORT_ADDRESS": "Bhairon Marg Pragati Maidan",
+            "GMAP_NAV_LINK": "https://www.google.com/maps/dir/?api=1&destination=28.6108617732,77.245493934&travelmode=driving",
+            "DISTANCE": "1.0 km",
+            "TIMING_DATA": null,
+            "HIGHLIGHTS": "Covered parking\nFree parking\nSecured parking\nRoadside parking\nDisabled person parking",
+            "PRICE": "40"
+         }
+      ]
+   }
+]
